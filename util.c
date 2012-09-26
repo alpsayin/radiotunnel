@@ -17,8 +17,10 @@
 
 void usage(void)
 {
-	printf("radiotunnel_vhf interface_name ip/subnet serial_device [ax25_destination]\n");
-	printf("radiotunnel_uhf interface_name ip/subnet serial_device [ax25_destination]\n");
+	printf("\n");
+	printf("radiotunnel radiomode[uhf|vhf] interface_name ip/subnet serial_device [ax25_destination]\n");
+	printf("Example: radiotunnel uhf radio0 10.0.0.1/24 /dev/ttyUSB0\n");
+	printf("\n");
 }
 void print_time(char* prefix)
 {

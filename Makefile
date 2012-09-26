@@ -30,8 +30,6 @@ INSTALL_DIR=/usr/bin
 
 
 all: $(SOURCES) $(EXECUTABLE)
-	cp $(EXECUTABLE) radiotunnel_vhf
-	cp $(EXECUTABLE) radiotunnel_uhf
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
@@ -45,8 +43,6 @@ $(EXECUTABLE): $(OBJECTS)
 
 clean:
 	rm -rf $(OBJECTS) $(EXECUTABLE)
-	rm -rf radiotunnel_uhf
-	rm -rf radiotunnel_vhf
 
 run: all
 	./$(EXECUTABLE)
@@ -55,10 +51,6 @@ run: all
 # and set suid, so that when it runs it runs as root
 install: all
 	cp $(EXECUTABLE) $(INSTALL_DIR)/$(EXECUTABLE)
-	cp $(EXECUTABLE) $(INSTALL_DIR)/radiotunnel_vhf
-	cp $(EXECUTABLE) $(INSTALL_DIR)/radiotunnel_uhf
-	chmod 4755 $(INSTALL_DIR)/radiotunnel_vhf
-	chmod 4755 $(INSTALL_DIR)/radiotunnel_uhf
 
 # remove the executable from the usr bin directory
 uninstall:
