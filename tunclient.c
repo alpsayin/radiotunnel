@@ -73,10 +73,12 @@ int main(int argc, char* argv[])
 	time_t last_transmission_time;
 	time_t last_reception_time;
 
-	if(argc == 1)
+	if(argc < 2) {
 		usage();
+		exit(0);
+	}
 
-	if(!strcmp("radiotunnel_uhf", argv[0]))
+	if(!strcmp("uhf", argv[1]))
 	{
 		openLogFile(UHF_LOGFILE_NAME);
 		baud = RADIOTUNNEL_BIM2A_DEFAULT_BAUD_RATE;
@@ -85,7 +87,7 @@ int main(int argc, char* argv[])
 		max_allowed_tx_interval = RADIOTUNNEL_BIM2A_MAX_ALLOWED_TRANSMISSION_TIME;
 		tx_message_interval = RADIOTUNNEL_BIM2A_TX_MESSAGE_INTERVAL;
 	}
-	else if(!strcmp("radiotunnel_vhf", argv[0]))
+	else if(!strcmp("vhf", argv[1]))
 	{
 		openLogFile(VHF_LOGFILE_NAME);
 		baud = RADIOTUNNEL_UHX1_DEFAULT_BAUD_RATE;
@@ -102,27 +104,27 @@ int main(int argc, char* argv[])
 	}
 
 
-	if (argc < 2)
+	if (argc < 3)
 		strcpy(tun_name, IF_NAME);
 	else
-		strcpy(tun_name, argv[1]);
+		strcpy(tun_name, argv[2]);
 
-	if(argc < 3)
+	if(argc < 4)
 		strcpy(subnet, IF_SUBNET);
 	else
-		strcpy(subnet, argv[2]);
+		strcpy(subnet, argv[3]);
 
-	if (argc < 4)
+	if (argc < 5)
 		strcpy(serial_device, "/dev/ttyUSB0");
 	else
-		strcpy(serial_device, argv[3]);
+		strcpy(serial_device, argv[4]);
 
-	if(argc < 5)
+	if(argc < 6)
 		ax25_get_broadcast_callsign(ax25_destination);
 	else
 	{
-		strncpy(ax25_destination, argv[4], 6);
-		ax25_destination[6]=atoi(argv[4]+6);
+		strncpy(ax25_destination, argv[5], 6);
+		ax25_destination[6]=atoi(argv[5]+6);
 	}
 
 	serialPortFd = serial_openSerialPort(serial_device, baud, tx_predelay, tx_postdelay);
