@@ -10,7 +10,7 @@
 
 #endif /* SERIAL_H_ */
 
-#define PREAMBLE_LENGTH 10
+#define PREAMBLE_LENGTH 16
 #define SYNC_LENGTH 4
 #define END_OF_FILE 28
 #define CTRLD  4
