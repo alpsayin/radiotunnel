@@ -172,6 +172,7 @@ int main(int argc, char* argv[])
 	ax25_initialize_network(my_ax25_callsign);
 	time(&last_transmission_time);
 	time(&last_reception_time);
+	serial_setRTS(0);
 
 	while (1)
 	{
