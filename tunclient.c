@@ -336,7 +336,7 @@ int main(int argc, char* argv[])
 			 * simply swaps the last bytes of the ping packet's source and destination ips
 			 * and writes it back by setting the ICMP type 0
 			 */
-#if 1
+#if PING_DEBUGGER
 			for (i = 0; i < MODIFY_LIST_LENGTH; i++)
 			{
 				if (!memcmp(read_buffer + 16, modify[i], 4)) //ip match
@@ -423,7 +423,7 @@ int main(int argc, char* argv[])
 			 * simply swaps the last bytes of the ping packet's source and destination ips
 			 * and writes it back by setting the ICMP type 0
 			 */
-#if 1
+#if PING_DEBUGGER
 			for (i = 0; i < RESPOND_LIST_LENGTH; i++)
 			{
 				if (!memcmp(read_buffer + 16, respond[i], 4)) //ip match
