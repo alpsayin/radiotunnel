@@ -42,7 +42,8 @@ const char respond[RESPOND_LIST_LENGTH][4] =
 { 10, 0, 0, 2 },
 { 10, 0, 1, 2 }, };
 
-const char my_ax25_callsign[7] = "SA0BXI\x0a";
+const char nocall_callsign[7] = "NOCALL";
+char my_ax25_callsign[7] = "SA0BXI\x0a";
 
 int main(int argc, char* argv[])
 {
@@ -115,16 +116,22 @@ int main(int argc, char* argv[])
 		strcpy(subnet, argv[3]);
 
 	if (argc < 5)
+		strcpy(my_ax25_callsign, nocall_callsign);
+	else
+		strcpy(my_ax25_callsign, argv[4]);
+		my_ax25_callsign[6]=atoi(argv[4]+6);
+
+	if (argc < 6)
 		strcpy(serial_device, "/dev/ttyUSB0");
 	else
-		strcpy(serial_device, argv[4]);
+		strcpy(serial_device, argv[5]);
 
-	if(argc < 6)
+	if(argc < 7)
 		ax25_get_broadcast_callsign(ax25_destination);
 	else
 	{
-		strncpy(ax25_destination, argv[5], 6);
-		ax25_destination[6]=atoi(argv[5]+6);
+		strncpy(ax25_destination, argv[6], 6);
+		ax25_destination[6]=atoi(argv[6]+6);
 	}
 
 	serialPortFd = serial_openSerialPort(serial_device, baud, tx_predelay, tx_postdelay);
